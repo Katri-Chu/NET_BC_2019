@@ -12,7 +12,7 @@ namespace DAY4_ABSTRACTION
         {
             Game game = new Game();
             game.StartNewGame();
-            game.Loop();
+            game.Loop();            Console.Read();
         }
     }
 }

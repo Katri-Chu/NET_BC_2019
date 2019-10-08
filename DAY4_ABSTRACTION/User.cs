@@ -11,12 +11,17 @@ namespace DAY4_ABSTRACTION
     {
         public override string GetName()
         {
+            if(!String.IsNullOrEmpty(Name))
+            {
+                return Name;
+            }
             return ConsoleInput.GetText("Enter your name: ");
         }
 
         public override int GuessNumber()
         {
-            return ConsoleInput.GetInt("Enter positive integer: ");
+            CurrentGuess = ConsoleInput.GetInt("Enter positive integer: ");
+            return CurrentGuess;
         }
     }
 }

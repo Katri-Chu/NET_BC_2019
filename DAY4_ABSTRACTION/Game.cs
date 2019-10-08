@@ -8,12 +8,11 @@ namespace DAY4_ABSTRACTION
 {
     public class Game
     {
-        int CurrentNumber;
-        IPlayer PlayerOne;
-        IPlayer PlayerTwo;        public void StartNewGame()
+        private int CurrentNumber;
+        private IPlayer PlayerOne;
+        private IPlayer PlayerTwo;        public void StartNewGame()
         {
-            Random random = new Random();
-            CurrentNumber = random.Next(1, 501);
+            CurrentNumber = new Random().Next(1, 501);
             PlayerOne = new User();
             PlayerTwo = new Robot();
 
@@ -21,7 +20,53 @@ namespace DAY4_ABSTRACTION
 
         public void Loop()
         {
+            while (true)
+            {
+                Console.WriteLine("Player one turn: ");
+                if(PlayerTurn(PlayerOne))
+                {
+                    break;
+                }
+                Console.WriteLine("Player two turn: ");
+                if (PlayerTurn(PlayerTwo))
+                {
+                    break;
+                }
+                /* bool IsNumberGuessed = false;
+                 * while (!IsNumberGuessed)
+                 * if (PlayerOne.GuessNumber() == CurrentNumber)
+                 {
+                     Console.WriteLine("Player one wins!");
+                     break;
+                 }
 
+                 if (PlayerTwo.GuessNumber() == CurrentNumber)
+                 {
+                     Console.WriteLine("Player two wins!");
+                     break;
+                 }(mans variants, arī pareizs)*/
+                // while(true)
+                //{
+                //PlayerTurn(PlayerOne); 
+                //if(Playerone.IsnumberGuessed(CurrentNumber))
+                //{Console.WriteLine("Player one wins!");
+                //break;
+                //PlayerTurn(PlayerTwo);
+                //}(sākotnējais variants, pirms izmaiņām)
+            }
         }
+
+         private bool PlayerTurn(IPlayer player)
+        {
+            player.GuessNumber();
+            bool isGuessed = player.IsNumberGuessed(CurrentNumber);
+
+            if(isGuessed)
+            {
+                Console.WriteLine("Player {0} wins!", player.GetName());
+            }
+            return isGuessed;
+
+        }
     }
 }
