@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Blackjack
 {
-    class Card
+    public class Card
     {
         string Rank { get; set; }
 

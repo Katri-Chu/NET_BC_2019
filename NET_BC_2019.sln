@@ -13,6 +13,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAY4_ABSTRACTION", "DAY4_AB
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blackjack", "Blackjack\Blackjack.csproj", "{B975DF77-9CB8-47D0-B556-220763C4E51E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebSamples", "WebSamples", "{C46D8A17-7DF3-4D9F-9CB8-2CCA64318A40}"
+	ProjectSection(SolutionItems) = preProject
+		Index.html = Index.html
+		Style.css = Style.css
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

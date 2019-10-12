@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Blackjack
 {
-    interface IBlackjackPlayer
+    public interface IBlackjackPlayer
     {
         string GetName();
         List<Card> GetCards();
         int CountPoints();
         bool IsGameCompleted();
         bool WantCard();
-        void GiveCard();
+        void GiveCard(Card card);
     }
 }

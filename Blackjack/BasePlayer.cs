@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace Blackjack
 {
-    class BasePlayer : IBlackjackPlayer
+    public abstract class BasePlayer : IBlackjackPlayer
     {
         protected string Name { get; set; }
 
-        protected List<Card> Cards { get; set; }
+        protected List<Card>Cards { get; set; }
         public BasePlayer()
         {
             Cards = new List<Card>();
             Name = GetName();
         }
-        List<Card> GetCards()
+       public  List<Card> GetCards()
         {
             return Cards; 
         }
@@ -39,14 +39,16 @@ namespace Blackjack
 
             return points;
         }
-        bool IsGameCompleted()
+        public virtual bool IsGameCompleted()
         {
-            return CountPoints() > 21;
+            return CountPoints() >= 21;
         }
-        void GiveCard(Card card)
+        public virtual void GiveCard(Card card)
         {
             Cards.Add(card);
         }
-
+        public abstract string GetName();
+        public abstract bool WantCard();
+        
     }
 }

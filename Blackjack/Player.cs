@@ -9,21 +9,47 @@ namespace Blackjack
 {
     class Player : BasePlayer
     {
-        string GetName()
+        public override string GetName()
         {
+            if (!String.IsNullOrEmpty(Name))
+            {
+                return Name;
+            }
             return ConsoleInput.GetText("Enter your name: ");
         }
-        bool WantCard()
+
+        public override bool WantCard()
         {
-           //string want = Console.WriteLine("Do you want another card?(y/n");
-            Console.ReadLine();
-            while(want == "y")
-            {
-
-            }
-
-
+            return ConsoleInput.GetBool("Do you want another card?(y/n)");
+            
         }
+
+        public override void GiveCard(Card card)
+        {
+            base.GiveCard(card);
+
+            Console.WriteLine("You received card: {0}", card.GetTitle());
+            Console.WriteLine("Your points: {0}", CountPoints());
+        }
+
+        //bool WantCard()
+        //{
+        //string want = Console.WriteLine("Do you want another card?(y/n)");
+        /*Console.WriteLine("Do you want another card?(y/n)");
+        if(  = "y")
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }*/
+        //if(want == "y")
+
+
+
+
+        //}
 
     }
 }
