@@ -35,11 +35,12 @@ namespace DAY3_error_handling
         {
             //calculate age using BirthDate
             // Save today's date.
-            var today = DateTime.Today;
+            //var today = DateTime.Today;
             // Calculate the age.
-            var age = today.Year - birthdate.Year;
+            //var age = today.Year - birthdate.Year;
             // Go back to the year the person was born in case of a leap year
-            if (birthdate.Date > today.AddYears(-age)) age--;
+            // if (birthdate.Date > today.AddYears(-age)) age--;
+            return 1;
         }
     }
 }
