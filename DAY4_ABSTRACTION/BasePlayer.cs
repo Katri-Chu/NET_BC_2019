@@ -6,12 +6,18 @@ using System.Threading.Tasks;
 
 namespace DAY4_ABSTRACTION
 {
+    /// <summary>
+    /// Abstract class of all methods that need to be realised 
+    /// </summary>
     public abstract class BasePlayer : IPlayer
     {
         protected string Name;
         protected int CurrentGuess;
         protected int NextGuess;
 
+        /// <summary>
+        /// Constructor of players
+        /// </summary>
         public BasePlayer()
         {
             Name = GetName();
