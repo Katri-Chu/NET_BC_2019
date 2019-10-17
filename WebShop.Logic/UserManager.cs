@@ -4,63 +4,65 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LogicSample
+namespace WebShop.Logic
 {
     public class UserManager
     {
         private int currentId;
         private List<User> Users;
-
         public UserManager()
         {
             Users = new List<User>();
-            currentId = 100;
+            currentId = 1;
         }
-        public List<User> GetAll()
+        public User GetByEmailAndPassword(string email, string password)
         {
-            return Users;
+            var getEmailandPassword = Users.Find(u => u.Email == email && u.Password == password);
+            return getEmailandPassword;
+            
         }
 
-        public User CreateNew(User user)
+        public User Create(User user)
         {
             user.Id = currentId;
             Users.Add(user);
             currentId++;
             return user;
-        }
 
+        }
+        public User GetByEmail(string email)
+        {
+            var getEmail = Users.Find(u => u.Email == email);
+            return getEmail;
+        }
         public void Delete(int id)
         {
             var user = Users.Find(u => u.Id == id);
             Users.Remove(user);
         }
-        public User Get(int id)
+        public List<User> GetAll()
         {
-            var user = Users.Find(u => u.Id == id);
-            return user;
+            return Users;
         }
-
         public void Update(User user)
         {
             var currentUser = Users.Find(u => u.Id == user.Id);
-            //properties to update
-            currentUser.Name = user.Name;
-            
+            currentUser.Email = user.Email;
+            currentUser.Password = user.Password;
         }
-
-        //STUB data > (zhargons)
-        //dummy data
         public void Seed()
         {
             Users.Add(new User()
             {
                 Id = 1,
-                Name = "Name 1"
+                Email = "Email1",
+                Password = "Password1"
             });
             Users.Add(new User()
             {
                 Id = 2,
-                Name = "Name 2"
+                Email = "Email2",
+                Password = "Password2"
             });
         }
     }
