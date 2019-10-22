@@ -17,7 +17,7 @@ namespace WebShop.Logic
         }
         public List<Item>GetByCategory(int categoryId)
         {
-            var CategoryId = Items.FindAll(u => u.Id == categoryId);
+            var CategoryId = Items.FindAll(u => u.Category == categoryId);
             return CategoryId;
         }
         public Item Create(Item item)
@@ -51,19 +51,19 @@ namespace WebShop.Logic
             {
                 Id = 100,
                 Price = 100,
-                Title = "Samsung",
-                Description = "A5",
-                Photo = "www.a5.com",
-                Category = 1
+                Title = "Title1",
+                Description = "Description1",
+                Photo = "Photo1",
+                Category = 3
             });
             Items.Add(new Item()
             {
                 Id = 200,
                 Price = 200,
-                Title = "iPhone",
-                Description = "11",
-                Photo = "www.iphone.com",
-                Category = 2
+                Title = "Title2",
+                Description = "Description2",
+                Photo = "Photo2",
+                Category = 4
             });
         }
     }

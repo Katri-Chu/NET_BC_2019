@@ -6,25 +6,14 @@ namespace WebShop.Logic.Tests
     [TestClass]
     public class UnitTest1
     {
-        //[TestMethod]
-        //public void Test_GetAllUsers()
-        //{
-        //    UserManager manager = new UserManager();
-        //    manager.Seed();
-
-        //    var result = manager.Create(User user);
-
-        //    Assert.AreEqual("Name 1", result[0].Name);
-        //    Assert.AreEqual(2, result.Count);
-        //}
         [TestMethod]
         public void TestCreateUser()
         {
             UserManager manager = new UserManager();
             User user = manager.Create(new User()
             {
-               Email = "new email",
-               Password = "new password"
+                Email = "new email",
+                Password = "new password"
             });
 
             Assert.AreEqual("new email", user.Email);
@@ -44,6 +33,8 @@ namespace WebShop.Logic.Tests
             Assert.AreEqual("Password1", user1.Password);
             Assert.AreEqual("Email2", user2.Email);
             Assert.AreEqual("Password2", user2.Password);
+            Assert.AreNotEqual("Passwrod4", user2.Password);
+            Assert.AreNotEqual("Email4", user2.Password);
             Assert.IsNull(user3);
         }
         [TestMethod]
@@ -61,7 +52,7 @@ namespace WebShop.Logic.Tests
 
             var user = manager.GetByEmailAndPassword(email: "new name", password: "new password");
 
-            
+
             Assert.AreEqual("new name", user.Email);
             Assert.AreEqual("new password", user.Password);
         }
@@ -117,5 +108,62 @@ namespace WebShop.Logic.Tests
             Assert.AreEqual("new description", item.Description);
             Assert.AreEqual("new photo", item.Photo);
         }
-    } 
+        [TestMethod]
+        public void TestDeleteItem()
+        {
+            ItemManager manager = new ItemManager();
+            manager.Seed();
+
+            manager.Delete(100);
+
+            var deletedItem = manager.Get(100);
+
+            Assert.IsNull(deletedItem);
+        }
+
+        //[TestMethod]
+        //public void TestGetItem()
+        //{
+        //    ItemManager manager = new ItemManager();
+        //    manager.Seed();
+
+        //}
+        //List<Item> GetByCategory(int categoryId) 
+        //    (izsaukt ar esošu kategoriju, pārbaudam skaitu.Pārbaudam piem ar 5, un atgriež 0)
+        //List<Category>GetAll() (atgriezž skaitu)
+
+        [TestMethod]
+        public void TestGetItemByCategory()
+        {
+            ItemManager manager = new ItemManager();
+            manager.Seed();
+            var result = manager.GetByCategory(100);
+            var result2 = manager.GetByCategory(300);
+            Assert.AreEqual(1, result.Count);
+            Assert.AreEqual(0, result2.Count);
+
+        }
+        [TestMethod]
+        public void TestCategoryGetAll()
+        {
+            CategoryManager manager = new CategoryManager();
+            manager.Seed();
+            var result = manager.GetAll();
+
+            Assert.AreEqual(2, result.Count);
+        }
+        [TestMethod]
+        public void TestCategoryGet()
+        {
+            CategoryManager manager = new CategoryManager();
+            manager.Seed();
+            Category category1 = manager.Get(1);
+            Category category2 = manager.Get(2);
+            Category category3 = manager.Get(3);
+
+            Assert.AreEqual("Name 1", category1.Title);
+            Assert.AreEqual("Name 2", category2.Title);
+            Assert.IsNull(category3);
+        }
+    }
 }

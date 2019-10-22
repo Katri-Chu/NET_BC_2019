@@ -9,8 +9,12 @@ namespace WebShop.Logic
     public class CategoryManager
     {
         
-        private List<Category> Categories;
+        public List<Category> Categories;
         
+        public CategoryManager()
+        {
+            Categories = new List<Category>();
+        }
         public List<Category>GetAll()
         {
             return Categories;
@@ -26,16 +30,33 @@ namespace WebShop.Logic
             Categories.Add(new Category()
             {
                 Id = 1,
-                Title = "Name 1",
-                CategoryId = 1
+                Title = "Electronics",
+                
             });
             Categories.Add(new Category()
             {
                 Id = 2,
-                Title = "Name 2",
+                Title = "Clothing",
+                
+            });
+            Categories.Add(new Category()
+            {
+                Id = 3,
+                Title = "Mobile",
+                CategoryId = 1
+            });
+            Categories.Add(new Category()
+            {
+                Id = 4,
+                Title = "TV",
+                CategoryId = 1
+            });
+            Categories.Add(new Category()
+            {
+                Id = 5,
+                Title = "Men's clothing",
                 CategoryId = 2
             });
-
         }
     }
 }
