@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebShop.Logic;
 using WebShop.Models;
@@ -54,29 +55,34 @@ namespace WebShop.Controllers
         [HttpPost]
         public IActionResult SignIn(UserModel model)
         {
-            ModelState.Remove("PasswordRepeat");
+           // ModelState.Remove("PasswordRepeat");
             if (ModelState.IsValid)
             {
-                UserManager manager = new UserManager();
+                UserManager manager = new UserManager();  //UserManager manager ir tas pats kas var manager
+                var user = manager.GetByEmailAndPassword(model.Email, model.Password);
 
-                if (manager.GetByEmailAndPassword(model.Email, model.Password) == null)
+                if (user == null)
                 {
                     ModelState.AddModelError("error", "Email not found!");
                 }
-                //else if() //password
-                //{
-                //    ModelState.AddModelError("error", "Password incorrect!");
-                //}
                 
                 else
                 {
-                    
+                    HttpContext.Session.SetUserId(user.Id);
+                    HttpContext.Session.SetUserEmail(user.Email);
+
                     TempData["message1"] = "You are signed in!";  //temporary data (pagaidu paziņojumi)
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Item");
                 }
             }
 
             return View();
+        }
+        public IActionResult SignOut()
+        {
+            HttpContext.Session.Clear();
+
+            return RedirectToAction("Index", "Item"); //index metodes item kontrolieris (var būt arī home)
         }
     }
 }

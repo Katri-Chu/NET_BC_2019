@@ -25,9 +25,62 @@ namespace WebShop.Controllers
                 Categories = category,
                 
             };
-            
-
             return View(model);
+        }
+
+        // 1. Pievieno jaunu darbību Buy ar vienu parametru - id
+        // 2. Atlasa lietotāja grozu no sesijas:
+        // 2.1. Ja grozs nav definēts, definē jaunu sarakstu (new List<int>())
+        // 3. Pievieno izvēlēto preces ID lietotāja grozam;
+        // 4. Saglabā lietotāja grozu sesijā.
+        public IActionResult Buy(int id)
+        {
+            var basket = HttpContext.Session.GetUserBasket();
+            if(basket == null)
+            {
+                basket = new List<int>();
+                
+            }
+            basket.Add(id);
+            HttpContext.Session.SetUserBasket(basket);
+
+            return RedirectToAction("Index", "Item");
+        }
+
+        public IActionResult Basket()
+        {
+            // 1. Definē jaunu sarakstu ar precēm
+            // 2. Par katru preci, kas ir lietotāja sesijā atlasa tās datus un pievieno sarakstam; (item manager)
+            // 3. Atgriež preču sarakstu uz View
+            var items = new List<Item>();
+            var basket = HttpContext.Session.GetUserBasket();
+            if (basket !=null)
+            { 
+                var manager = new ItemManager();
+                manager.Seed();
+
+                foreach (var id in basket)
+                {
+                    items.Add(manager.Get(id));
+                }
+            }
+            return View(items);
+        }
+        public IActionResult Delete()
+        {
+            var items = new List<Item>();
+            var basket = HttpContext.Session.GetUserBasket();
+            if (basket != null)
+            {
+                var manager = new ItemManager();
+                manager.Seed();
+
+                foreach (var id in basket)
+                {
+                    items.Remove(manager.Get(id));
+                }
+            }
+            return RedirectToAction("Basket", "Item");
         }
     }
 }

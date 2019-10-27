@@ -18,9 +18,9 @@ namespace WebShop.Models
         [MinLength(8)]   //var arī regular expression izmantot
         public string Password { get; set; }
 
-        [Required]
-        [DataType(DataType.Password)]
-        [Compare(nameof(Password))]
-        public string PasswordRepeat { get; set; }
+        //[Required]
+        //[DataType(DataType.Password)]
+        //[Compare(nameof(Password))]
+        //public string PasswordRepeat { get; set; }
     }
 }
