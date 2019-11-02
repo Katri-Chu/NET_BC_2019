@@ -1,0 +1,36 @@
+﻿@model List<SludinajumuPortals.Logic.Category>  
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+    @if(Context.Session.GetUserEmail() != null)
+    { 
+        <p class="text-right">
+            <button type="button" class="btn btn-default">Pievienot sludinājumu</button>
+        </p>
+    }
+    <div class="row">
+
+        @foreach (var category in Model.Where(i => !i.CategoryId.HasValue))
+        {
+            <div class="col-md-3">
+                <div class="list-group">
+                    <a href="#" class="list-group-item active">
+                        @category.Title
+                    </a>
+                    @foreach (var subcategory in Model.Where(r => r.CategoryId == category.Id))
+                    {
+                        <a class="list-group-item" asp-controller="Item" asp-action="Index" asp-route-id="@subcategory.Id">
+                            @subcategory.Title
+                        </a>
+                    }
+                </div>
+            </div>
+         }
+    </div>
+        
+
+
+
+

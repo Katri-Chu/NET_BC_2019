@@ -53,7 +53,7 @@ namespace WebShop.Logic
                 Price = 100,
                 Title = "Title1",
                 Description = "Description1",
-                Photo = "Photo1",
+                Photo = "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRE9-LwCqPE5HabQk3FcXaMjQPWRUJHzw0Xw3OAyg0jatBbYBgw",
                 Category = 3
             });
             Items.Add(new Item()
@@ -62,7 +62,7 @@ namespace WebShop.Logic
                 Price = 200,
                 Title = "Title2",
                 Description = "Description2",
-                Photo = "Photo2",
+                Photo = "https://images.pexels.com/photos/207962/pexels-photo-207962.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
                 Category = 4
             });
         }

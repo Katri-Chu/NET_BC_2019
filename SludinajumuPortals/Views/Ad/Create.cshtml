@@ -1,0 +1,35 @@
+﻿@model AdModel
+@{
+    ViewData["Title"] = "Jauns sludinājums";
+}
+
+<h2>Jauns sludinājums</h2>
+
+@Html.ValidationSummary()
+
+<form class="form-horizontal" action="Create" method="post">
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Kategorija</label>
+        <div class="col-sm-10">
+            <select asp-for="CategoryId" asp-items="@(new SelectList(Model.Categories, "Id", "Title"))" class="form-control">
+                <option value="">-- Izvēltēties kategoriju</option>
+            </select>
+        </div>
+    </div>
+   
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Cena</label>
+        <div class="col-sm-10">
+            <input asp-for="Price" class="form-control" />
+        </div>
+     </div>
+    
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Apraksts</label>
+        <div class="col-sm-10">
+         <textarea asp-for="Description" class="form-control">
+            </textarea>
+       </div>
+    </div>
+</form>
+

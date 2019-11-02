@@ -17,7 +17,13 @@ namespace WebShop.Controllers
             var items = manager.GetByCategory(id);
             var manager1 = new CategoryManager();
             manager1.Seed();
+
             var category = manager1.GetAll();
+           // var categories = CategoryManager.GetAll(); <pabeigt mājās
+            //foreach(var cat in categories)
+            //{
+            //    //... atlasa un uzstāda skaitu zem konkrētās kategorijas
+            //}
             
             var model = new CatalogModel()
             {
@@ -33,8 +39,12 @@ namespace WebShop.Controllers
         // 2.1. Ja grozs nav definēts, definē jaunu sarakstu (new List<int>())
         // 3. Pievieno izvēlēto preces ID lietotāja grozam;
         // 4. Saglabā lietotāja grozu sesijā.
-        public IActionResult Buy(int id)
+        public IActionResult Buy(int id, int categoryId)
         {
+            var manager = new ItemManager();
+            manager.Seed();
+            var item = manager.Get(id);
+
             var basket = HttpContext.Session.GetUserBasket();
             if(basket == null)
             {
@@ -44,7 +54,7 @@ namespace WebShop.Controllers
             basket.Add(id);
             HttpContext.Session.SetUserBasket(basket);
 
-            return RedirectToAction("Index", "Item");
+            return RedirectToAction("Index", "Item", new {id = categoryId }); //var uzskatīt vairākus parametrus
         }
 
         public IActionResult Basket()
@@ -66,20 +76,12 @@ namespace WebShop.Controllers
             }
             return View(items);
         }
-        public IActionResult Delete()
+        public IActionResult Delete(int id)
         {
-            var items = new List<Item>();
+            
             var basket = HttpContext.Session.GetUserBasket();
-            if (basket != null)
-            {
-                var manager = new ItemManager();
-                manager.Seed();
-
-                foreach (var id in basket)
-                {
-                    items.Remove(manager.Get(id));
-                }
-            }
+            basket.Remove(id);
+            HttpContext.Session.SetUserBasket(basket);
             return RedirectToAction("Basket", "Item");
         }
     }

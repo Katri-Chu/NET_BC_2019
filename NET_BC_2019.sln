@@ -19,6 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebSamples", "WebSamples", 
 		JavascriptSample.html = JavascriptSample.html
 		Script.js = Script.js
 		Shop.html = Shop.html
+		SludinajumuPortals.html = SludinajumuPortals.html
 		Style.css = Style.css
 	EndProjectSection
 EndProject
@@ -32,7 +33,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebShop.Logic.Tests", "WebS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebSample", "WebSample\WebSample.csproj", "{FED7A73E-E01C-4209-B701-BC69E943081C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebShop", "WebShop\WebShop.csproj", "{A2D29138-4763-4855-9290-85D9E449B5CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebShop", "WebShop\WebShop.csproj", "{A2D29138-4763-4855-9290-85D9E449B5CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SludinajumuPortals.Logic", "SludinajumuPortalsLogic\SludinajumuPortals.Logic.csproj", "{1203F368-7826-4D8C-9F03-5D2D67A6D1EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SludinajumuPortals", "SludinajumuPortals\SludinajumuPortals.csproj", "{093CFD23-4244-423E-9E6B-B031B104C4BF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -84,6 +89,14 @@ Global
 		{A2D29138-4763-4855-9290-85D9E449B5CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A2D29138-4763-4855-9290-85D9E449B5CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A2D29138-4763-4855-9290-85D9E449B5CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1203F368-7826-4D8C-9F03-5D2D67A6D1EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1203F368-7826-4D8C-9F03-5D2D67A6D1EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1203F368-7826-4D8C-9F03-5D2D67A6D1EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1203F368-7826-4D8C-9F03-5D2D67A6D1EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{093CFD23-4244-423E-9E6B-B031B104C4BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{093CFD23-4244-423E-9E6B-B031B104C4BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{093CFD23-4244-423E-9E6B-B031B104C4BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{093CFD23-4244-423E-9E6B-B031B104C4BF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
