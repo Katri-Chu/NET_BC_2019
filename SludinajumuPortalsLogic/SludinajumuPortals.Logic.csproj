@@ -7,8 +7,8 @@
     <ProjectGuid>{1203F368-7826-4D8C-9F03-5D2D67A6D1EE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SludinajumuPortalsLogic</RootNamespace>
-    <AssemblyName>SludinajumuPortalsLogic</AssemblyName>
+    <RootNamespace>SludinajumuPortals.Logic</RootNamespace>
+    <AssemblyName>SludinajumuPortals.Logic</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -118,11 +118,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseData.cs" />
+    <Compile Include="BaseManager.cs" />
     <Compile Include="Category.cs" />
     <Compile Include="CategoryManager.cs" />
     <Compile Include="Ad.cs" />
     <Compile Include="AdManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SludinajumuPortalsDB.cs" />
     <Compile Include="User.cs" />
     <Compile Include="UserManager.cs" />
   </ItemGroup>

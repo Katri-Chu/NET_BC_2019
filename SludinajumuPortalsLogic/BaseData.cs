@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace SludinajumuPortals.Logic
 {
-    public class Category : BaseData
+    public abstract class BaseData
     {
-        public string Title { get; set; }
-        public int? CategoryId { get; set; }
+        public int Id { get; set; }
     }
 }

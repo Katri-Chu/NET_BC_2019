@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace SludinajumuPortals.Logic
 {
-    public class Ad //advertisement
+    public class Ad : BaseData //advertisements
     {
-        public int Id { get; set; }
+        
         public decimal Price { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }

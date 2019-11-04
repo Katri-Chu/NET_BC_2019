@@ -6,8 +6,11 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SludinajumuPortals.Logic;
+
 
 namespace SludinajumuPortals
 {
@@ -32,6 +35,13 @@ namespace SludinajumuPortals
 
             services.AddSession();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            
+            // dependency injection
+            services.AddDbContext<SludinajumuPortalsDB>
+               (db => db.UseSqlServer(Configuration.GetConnectionString("MyDB")));
+
+            services.AddScoped<CategoryManager>();
+            services.AddScoped<AdManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
