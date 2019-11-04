@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace WebShop.Logic
 {
-    public class Category
+    public class Category : BaseData
     {
-        public int Id { get; set; }
+        //public int Id { get; set; }
         public string Title { get; set; }
         /// <summary>
         /// virskategorijas identifikators
@@ -16,5 +16,6 @@ namespace WebShop.Logic
         /// </summary>
         public int? CategoryId { get; set; }
         //? jo nav nebūt vērtības. ? nozīmē, ka ir nullējams
+        public int ItemCount { get; set; } 
     }
 }

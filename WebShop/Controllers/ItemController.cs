@@ -10,25 +10,33 @@ namespace WebShop.Controllers
 {
     public class ItemController : Controller
     {
+        private CategoryManager _categories;
+        private ItemManager _items;
+        public ItemController(CategoryManager categoryManager, ItemManager itemManager )
+        {
+            _categories = categoryManager;
+            _items = itemManager;
+            // categoryManager tiek izpildīts no Dependency Injection
+            // _categories ir pieejams visas klases ietvaros
+        }
+
+
         public IActionResult Index(int id)
         {
-            var manager = new ItemManager();
-            manager.Seed();
-            var items = manager.GetByCategory(id);
-            var manager1 = new CategoryManager();
-            manager1.Seed();
 
-            var category = manager1.GetAll();
-           // var categories = CategoryManager.GetAll(); <pabeigt mājās
-            //foreach(var cat in categories)
-            //{
-            //    //... atlasa un uzstāda skaitu zem konkrētās kategorijas
-            //}
+            var items = _items.GetByCategory(id);
+            var categories = _categories.GetAll();
+           
+            foreach(var cat in categories)
+            {
+                //    //... atlasa un uzstāda skaitu zem konkrētās kategorijas
+                cat.ItemCount = _items.GetByCategory(cat.Id).Count;
+            }
             
             var model = new CatalogModel()
             {
                 Items = items,
-                Categories = category,
+                Categories = categories,
                 
             };
             return View(model);
@@ -41,9 +49,8 @@ namespace WebShop.Controllers
         // 4. Saglabā lietotāja grozu sesijā.
         public IActionResult Buy(int id, int categoryId)
         {
-            var manager = new ItemManager();
-            manager.Seed();
-            var item = manager.Get(id);
+            
+            var item = _items.Get(id);
 
             var basket = HttpContext.Session.GetUserBasket();
             if(basket == null)
@@ -66,12 +73,9 @@ namespace WebShop.Controllers
             var basket = HttpContext.Session.GetUserBasket();
             if (basket !=null)
             { 
-                var manager = new ItemManager();
-                manager.Seed();
-
                 foreach (var id in basket)
                 {
-                    items.Add(manager.Get(id));
+                    items.Add(_items.Get(id));
                 }
             }
             return View(items);

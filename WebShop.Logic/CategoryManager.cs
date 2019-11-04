@@ -3,60 +3,44 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebShop.Logic
 {
-    public class CategoryManager
+    public class CategoryManager : BaseManager<Category>
     {
+
+        //WebShopDB _db; Viss, kas aizīmēts, bija vajadzīgs, lai viss strādātu bez basemanager klases
         
-        public List<Category> Categories;
-        
-        public CategoryManager()
+        public CategoryManager(WebShopDB db)
+            :base(db) //padodam tālāk uz basemanageri
         {
-            Categories = new List<Category>();
-        }
-        public List<Category>GetAll()
-        {
-            return Categories;
+            //_db = db;
         }
 
-        public Category Get(int id)
+        // raksta override, izvēlas kuru mainīgo vajag (Table šajā gadījumā), un enter < pats uzģenerē vajadzīgo rindu
+        protected override DbSet<Category> Table
         {
-            var category = Categories.Find(u => u.Id == id);
-            return category;
+            get
+            {
+                return _db.Categories;
+            }
         }
+
+        //jau realizēts baseManager
+        //public List<Category>GetAll() j
+        //{
+        //    return _db.Categories.ToList();
+        //}
+
+        //public Category Get(int id)
+        //{
+        //    var category = _db.Categories.FirstOrDefault(u => u.Id == id);
+        //    return category;
+        //}
         public void Seed()
         {
-            Categories.Add(new Category()
-            {
-                Id = 1,
-                Title = "Electronics",
-                
-            });
-            Categories.Add(new Category()
-            {
-                Id = 2,
-                Title = "Clothing",
-                
-            });
-            Categories.Add(new Category()
-            {
-                Id = 3,
-                Title = "Mobile",
-                CategoryId = 1
-            });
-            Categories.Add(new Category()
-            {
-                Id = 4,
-                Title = "TV",
-                CategoryId = 1
-            });
-            Categories.Add(new Category()
-            {
-                Id = 5,
-                Title = "Men's clothing",
-                CategoryId = 2
-            });
+           
         }
     }
 }

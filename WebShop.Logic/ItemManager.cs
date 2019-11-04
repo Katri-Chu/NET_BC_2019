@@ -3,68 +3,65 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebShop.Logic
 {
-    public class ItemManager
+    public class ItemManager : BaseManager<Item>
     {
-        private int currentId;
-        private List<Item> Items;
-        public ItemManager()
+        //WebShopDB _db;
+        
+        public ItemManager(WebShopDB db)
+            :base(db)
         {
-            Items = new List<Item>();
-            currentId = 100;
+            //_db = db;
+        }
+
+        protected override DbSet<Item> Table
+        {
+            get
+            {
+                return _db.Items;
+            }
         }
         public List<Item>GetByCategory(int categoryId)
         {
-            var CategoryId = Items.FindAll(u => u.Category == categoryId);
-            return CategoryId;
+            var items = _db.Items
+                .Where(u => u.Category == categoryId)
+                .ToList();
+            return items;
         }
-        public Item Create(Item item)
-        {
-            item.Id = currentId;
-            Items.Add(item);
-            currentId++;
-            return item;
-        }
-        public void Update(Item item)
-        {
-            var currentItem = Items.Find(u => u.Id == item.Id);
-            currentItem.Price = item.Price;
-            currentItem.Title = item.Title;
-            currentItem.Description = item.Description;
-            currentItem.Photo = item.Photo;
-        }
-        public void Delete(int id)
-        {
-            var item = Items.Find(u => u.Id == id);
-            Items.Remove(item);
-        }
-        public Item Get(int id)
-        {
-            var item = Items.Find(u => u.Id == id);
-            return item;
-        }
+        //public Item Create(Item item) //viss realizēts basemanager
+        //{
+        //    _db.Items.Add(item);
+        //    _db.SaveChanges();
+        //    return item;
+        //}
+        //public void Update(Item item)
+        //{
+        //    var currentItem = _db.Items.FirstOrDefault(u => u.Id == item.Id);
+        //    currentItem.Price = item.Price;
+        //    currentItem.Title = item.Title;
+        //    currentItem.Description = item.Description;
+        //    currentItem.Photo = item.Photo;
+
+        //    _db.SaveChanges();
+        //}
+        //public void Delete(int id)
+        //{
+        //    var item = _db.Items.FirstOrDefault(u => u.Id == id);
+        //    _db.Items.Remove(item);
+
+        //    _db.SaveChanges();
+        //}
+        //public Item Get(int id)
+        //{
+        //    var item = _db.Items.FirstOrDefault(u => u.Id == id);
+        //    return item;
+        //}
         public void Seed()
         {
-            Items.Add(new Item()
-            {
-                Id = 100,
-                Price = 100,
-                Title = "Title1",
-                Description = "Description1",
-                Photo = "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRE9-LwCqPE5HabQk3FcXaMjQPWRUJHzw0Xw3OAyg0jatBbYBgw",
-                Category = 3
-            });
-            Items.Add(new Item()
-            {
-                Id = 200,
-                Price = 200,
-                Title = "Title2",
-                Description = "Description2",
-                Photo = "https://images.pexels.com/photos/207962/pexels-photo-207962.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-                Category = 4
-            });
+            
         }
     }
 }
