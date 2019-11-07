@@ -8,9 +8,9 @@ namespace SludinajumuPortals.Models
 {
     public class CatalogModel
     {
-        public List<Ad> Items { get; set; }
+        public List<Ad> Ads { get; set; }
 
-        public List<Category> Categories { get; set; }
+        public Category Categories { get; set; }
 
 
     }

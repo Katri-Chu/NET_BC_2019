@@ -1,14 +1,18 @@
 ﻿@model List<SludinajumuPortals.Logic.Category>  
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Kategorijas";
 }
 
 
-    @if(Context.Session.GetUserEmail() != null)
+    @if(Context.Session.GetUserId().HasValue)
     { 
-        <p class="text-right">
-            <button type="button" class="btn btn-default">Pievienot sludinājumu</button>
-        </p>
+        <div class="row">
+            <div class="col-md-12">
+                <p class="text-right">
+                    <a asp-controller="Ad" asp-action="Create" class="btn btn-default btn-sm">Pievienot sludinājumu</a>
+                </p>
+            </div>
+        </div>
     }
     <div class="row">
 
@@ -21,8 +25,9 @@
                     </a>
                     @foreach (var subcategory in Model.Where(r => r.CategoryId == category.Id))
                     {
-                        <a class="list-group-item" asp-controller="Item" asp-action="Index" asp-route-id="@subcategory.Id">
+                        <a asp-controller="Ad" asp-action="Index" asp-route-id="@subcategory.Id" class="list-group-item">
                             @subcategory.Title
+                            <span class="badge">@subcategory.AdCount</span>
                         </a>
                     }
                 </div>

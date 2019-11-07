@@ -12,17 +12,18 @@ namespace SludinajumuPortals.Controllers
     public class HomeController : Controller
     {
         
-            private CategoryManager manager = new CategoryManager();
+            private CategoryManager _manager;
+        
             
-            public HomeController()
+            public HomeController(CategoryManager manager)
             {
-                manager.Seed();
+            _manager = manager;
             }
 
         public IActionResult Index()
         {
-            var categories = manager.GetAll();
-
+            var categories = _manager.GetAllWithAdCount();
+            
             return View(categories);
         }
         

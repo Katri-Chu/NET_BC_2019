@@ -12,7 +12,14 @@ namespace SludinajumuPortals.Controllers
 {
     public class AccountController : Controller
     {
-        UserManager manager = new UserManager();
+        UserManager _users;
+        AdManager _ads;
+
+        public AccountController(UserManager manager, AdManager adManager)
+        {
+            _users = manager;
+            _ads = adManager;
+        }
        
         public IActionResult SignIn()
         {
@@ -28,15 +35,14 @@ namespace SludinajumuPortals.Controllers
         {
             if (ModelState.IsValid)
             {
-                UserManager manager = new UserManager();
 
-                if (manager.GetByEmail(model.Email) != null)
+                if (_users.GetByEmail(model.Email) != null)
                 {
                     ModelState.AddModelError("error", "Šāds epasts jau eksistē!");
                 }
                 else
                 {
-                    manager.Create(new Logic.User()
+                    _users.Create(new Logic.User()
                     {
                         Email = model.Email,
                         Password = model.Password
@@ -54,7 +60,7 @@ namespace SludinajumuPortals.Controllers
             
             if (ModelState.IsValid)
             {
-                var user = manager.GetByEmailAndPassword(model.Email, model.Password);
+                var user = _users.GetByEmailAndPassword(model.Email, model.Password);
 
                 if (user == null)
                 {
@@ -78,6 +84,13 @@ namespace SludinajumuPortals.Controllers
             HttpContext.Session.Clear();
 
             return RedirectToAction("Index", "Home"); 
+        }
+
+        public IActionResult MyAds()
+        {
+            var ads = _ads.GetByUser(HttpContext.Session.GetUserEmail());
+
+            return View(ads);
         }
     }
 }

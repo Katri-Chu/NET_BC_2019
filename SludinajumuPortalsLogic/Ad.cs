@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,5 +20,9 @@ namespace SludinajumuPortals.Logic
         public string Telephone { get; set; }
 
         public string Email { get; set; }
+
+        /// Virtuāla īpašība - Kategorijas dati
+        [NotMapped]
+        public Category Category { get; set; }
     }
 }
