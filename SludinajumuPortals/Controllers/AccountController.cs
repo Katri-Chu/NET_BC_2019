@@ -64,7 +64,7 @@ namespace SludinajumuPortals.Controllers
 
                 if (user == null)
                 {
-                    ModelState.AddModelError("error", "Email not found!");
+                    ModelState.AddModelError("error", "Nekorekts e-pasts/parole!");
                 }
 
                 else

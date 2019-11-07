@@ -25,25 +25,22 @@ namespace SludinajumuPortals.Logic
             }
         }
         public User GetByEmailAndPassword(string email, string password)
-            {
-                var getEmailandPassword = _db.Users.FirstOrDefault(u => u.Email == email && u.Password == password);
-                return getEmailandPassword;
+        {
+            return Table.FirstOrDefault(u => u.Email == email && u.Password == password);
+        }
 
-            }
+        //public User Create(User user)
+        //{
+        //    user.Id = currentId;
+        //    Users.Add(user);
+        //    currentId++;
+        //    return user;
 
-            //public User Create(User user)
-            //{
-            //    user.Id = currentId;
-            //    Users.Add(user);
-            //    currentId++;
-            //    return user;
-
-            //}
-            public User GetByEmail(string email)
-            {
-                var getEmail = _db.Users.FirstOrDefault(u => u.Email == email);
-                return getEmail;
-            }
+        //}
+        public User GetByEmail(string email)
+        {
+            return Table.FirstOrDefault(u => u.Email == email);
+        }
 
         public User GetByUser(int id)
         {

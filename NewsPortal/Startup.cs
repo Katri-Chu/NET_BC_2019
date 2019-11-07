@@ -5,14 +5,14 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using SludinajumuPortals.Logic;
+using NewsPortal.Logic;
 
-
-namespace SludinajumuPortals
+namespace NewsPortal
 {
     public class Startup
     {
@@ -33,16 +33,13 @@ namespace SludinajumuPortals
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddSession();
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            
-            // dependency injection
-            services.AddDbContext<SludinajumuPortalsDB>
+            services.AddDbContext<NewsPortalDB>
                (db => db.UseSqlServer(Configuration.GetConnectionString("MyDB")));
 
-            services.AddScoped<CategoryManager>();
-            services.AddScoped<AdManager>();
-            services.AddScoped<UserManager>();
+            services.AddScoped<TopicManager>();
+            services.AddScoped<NewsManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,11 +52,12 @@ namespace SludinajumuPortals
             else
             {
                 app.UseExceptionHandler("/Home/Error");
+                app.UseHsts();
             }
 
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
-            app.UseSession();
 
             app.UseMvc(routes =>
             {
